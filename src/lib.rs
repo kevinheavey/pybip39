@@ -41,6 +41,11 @@ impl Mnemonic {
     }
 
     #[getter]
+    pub fn entropy(&self) -> &[u8] {
+        self.0.entropy()
+    }
+
+    #[getter]
     pub fn phrase(&self) -> &str {
         self.0.phrase()
     }
