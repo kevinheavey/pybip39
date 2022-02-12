@@ -1,0 +1,15 @@
+[package]
+name = "pybip39"
+version = "0.1.0"
+edition = "2021"
+include = ["src/lib.rs", "./LICENSE", "pyproject.toml"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "pybip39"
+crate-type = ["cdylib"]
+
+
+[dependencies]
+pyo3 = { version = "0.15.1", features = ["extension-module", "abi3-py39", "anyhow"] }
+tiny-bip39 = "0.8.2"
