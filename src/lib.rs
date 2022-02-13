@@ -13,6 +13,7 @@ struct Mnemonic(pub MnemonicOriginal);
 #[pymethods]
 impl Mnemonic {
     #[new]
+    #[args(language = "\"en\"")]
     pub fn new(word_count: usize, language: &str) -> PyResult<Self> {
         let mnemonic_type = MnemonicType::for_word_count(word_count)?;
         let resolved_language = resolve_language(language)?;
@@ -22,12 +23,14 @@ impl Mnemonic {
         )))
     }
     #[staticmethod]
+    #[args(language = "\"en\"")]
     pub fn from_entropy(entropy: &[u8], language: &str) -> PyResult<Self> {
         let lang = resolve_language(language)?;
         let underlying = MnemonicOriginal::from_entropy(entropy, lang)?;
         Ok(Self(underlying))
     }
     #[staticmethod]
+    #[args(language = "\"en\"")]
     pub fn from_phrase(phrase: &str, language: &str) -> PyResult<Self> {
         let lang = resolve_language(language)?;
         let underlying = MnemonicOriginal::from_phrase(phrase, lang)?;
@@ -35,6 +38,7 @@ impl Mnemonic {
     }
 
     #[staticmethod]
+    #[args(language = "\"en\"")]
     pub fn validate(phrase: &str, language: &str) -> PyResult<()> {
         let lang = resolve_language(language)?;
         Ok(MnemonicOriginal::validate(phrase, lang)?)
@@ -56,6 +60,10 @@ impl Mnemonic {
 
     pub fn __str__(&self) -> &str {
         self.phrase()
+    }
+
+    pub fn __bytes__(&self) -> &[u8] {
+        self.entropy()
     }
 }
 
