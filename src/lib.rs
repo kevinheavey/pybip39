@@ -8,7 +8,7 @@ fn resolve_language(lang: &str) -> PyResult<Language> {
 }
 
 #[pyclass]
-struct Mnemonic(MnemonicOriginal);
+struct Mnemonic(pub MnemonicOriginal);
 
 #[pymethods]
 impl Mnemonic {
@@ -48,6 +48,14 @@ impl Mnemonic {
     #[getter]
     pub fn phrase(&self) -> &str {
         self.0.phrase()
+    }
+
+    pub fn hex(&self) -> String {
+        format!("{:x}", self.0)
+    }
+
+    pub fn __str__(&self) -> &str {
+        self.phrase()
     }
 }
 
