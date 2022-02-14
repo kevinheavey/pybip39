@@ -1,16 +1,16 @@
-pybip39
-=======
+.. pybip39 documentation master file, created by
+   sphinx-quickstart on Mon Feb 14 00:09:53 2022.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
 
-pybip39 is a Python wrapper for `tiny-bip39 <https://github.com/maciejhirsz/tiny-bip39>.
+Welcome to pybip39's documentation!
+===================================
 
-Installation
-------------
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
 
-::
 
-    pip install pybip39
-
-Note: requires Python >= 3.7.
 
 API
 ---
@@ -19,7 +19,3 @@ API
     :imported-members:
     :members:
     :undoc-members:
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:

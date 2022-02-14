@@ -10,4 +10,4 @@ Cargo.lock
 **/*.rs.bk
 
 __pycache__/
-docs/_build/
+_build/
