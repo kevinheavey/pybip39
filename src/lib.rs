@@ -22,6 +22,7 @@ fn resolve_language(lang: &str) -> PyResult<Language> {
 /// but beware that the entropy value is **not the same thing** as an HD wallet seed, and should
 /// *never* be used that way.
 #[pyclass]
+#[pyo3(text_signature = "(word_count, language, /)")]
 struct Mnemonic(pub MnemonicOriginal);
 
 #[pymethods]
@@ -57,7 +58,17 @@ impl Mnemonic {
         let lang = resolve_language(language)?;
         Ok(MnemonicOriginal::validate(phrase, lang)?)
     }
-
+    /// bytes: The original entropy value of the mnemonic phrase.
+    ///
+    /// Example:
+    ///     >>> from pybip39 import Mnemonic
+    ///     >>> phrase = "park remain person kitchen mule spell knee armed position rail grid ankle"
+    ///     >>> mnemonic = Mnemonic.from_phrase(phrase)
+    ///     >>> mnemonic.entropy
+    ///     b'\xa0V\xb2\x8d=\x89\x15\xa2^\xe0^\xa8v\x1d\x99\x84'
+    ///
+    /// Note:
+    ///     You shouldn't use the generated entropy as secrets, for that generate a new `Seed` from the `Mnemonic`.
     #[getter]
     pub fn entropy(&self) -> &[u8] {
         self.0.entropy()

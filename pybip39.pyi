@@ -7,7 +7,19 @@ class Mnemonic:
     @staticmethod
     def from_entropy(entropy: bytes, language: _Language = "en") -> Mnemonic: ...
     @staticmethod
-    def from_phrase(phrase: str, language: _Language = "en") -> Mnemonic: ...
+    def from_phrase(phrase: str, language: _Language = "en") -> Mnemonic:
+        """Create a [`Mnemonic`][Mnemonic] from an existing mnemonic phrase.
+
+        The phrase supplied will be checked for word length and validated according to the checksum
+        specified in BIP0039
+
+        Args:
+            phrase (str): The seed phrase.
+            language (_Language, optional): _description_. Defaults to "en".
+
+        Returns:
+            Mnemonic: _description_
+        """
     @staticmethod
     def validate(phrase: str, language: _Language = "en") -> None: ...
     @property
