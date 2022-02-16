@@ -1,4 +1,4 @@
-from pybip39 import Mnemonic, MnemonicType, Language
+from pybip39 import Mnemonic, MnemonicType
 
 
 def test_back_to_back() -> None:
