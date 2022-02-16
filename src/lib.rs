@@ -220,6 +220,7 @@ pub enum MnemonicType {
 ///      mnemonic (Mnemonic): The mnemonic to generate the seed from.
 ///      password (str): The seed password.
 #[pyclass]
+#[pyo3(text_signature = "(mnemonic, password)")]
 struct Seed(pub SeedOriginal);
 
 #[pymethods]
