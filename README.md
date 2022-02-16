@@ -8,6 +8,12 @@ It is merely a wrapper around the
 [tiny-bip39](https://github.com/maciejhirsz/tiny-bip39)
 Rust library.
 
+## Installation
+
+`pip install pybip39`
+
+Note: requires Python >= 3.7.
+
 ## Example:
 
 ```python
@@ -24,3 +30,8 @@ seed_bytes = bytes(seed)
 print(seed_bytes)
 
 ```
+
+## Documentation credit
+
+Most of this documentation is copied from
+the [tiny-bip39 docs](https://docs.rs/tiny-bip39/latest/bip39/index.html).

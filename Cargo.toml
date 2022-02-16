@@ -11,5 +11,5 @@ crate-type = ["cdylib"]
 
 
 [dependencies]
-pyo3 = { version = "0.15.1", features = ["extension-module", "abi3-py39", "anyhow"] }
+pyo3 = { git = "https://github.com/PyO3/pyo3", features = ["extension-module", "abi3-py39", "anyhow"] }
 tiny-bip39 = "0.8.2"

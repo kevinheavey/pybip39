@@ -3,19 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pybip39's documentation!
-===================================
+
+Introduction
+============
+
+.. mdinclude:: ../README.md
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
-
-
-API
----
-
-.. automodule:: pybip39
-    :imported-members:
-    :members:
-    :undoc-members:
+   self
+   api_reference

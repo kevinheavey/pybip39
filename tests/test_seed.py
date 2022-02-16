@@ -1,7 +1,5 @@
 from typing import Literal
-from pybip39 import Mnemonic, Seed
-
-_Language = Literal["en", "zh-hans", "zh-hant", "fr", "it", "ja", "ko", "es"]
+from pybip39 import Mnemonic, Seed, Language
 
 
 def seed_hex_format() -> None:
@@ -26,7 +24,7 @@ def seed_hex_format() -> None:
         ]
     )
 
-    mnemonic = Mnemonic.from_entropy(entropy, "en")
+    mnemonic = Mnemonic.from_entropy(entropy)
     seed = Seed(mnemonic, "password")
 
     assert (
@@ -36,7 +34,7 @@ def seed_hex_format() -> None:
 
 
 def check_unicode_normalization(
-    lang: _Language, phrase: str, password: str, expected_seed_hex: str
+    lang: Language, phrase: str, password: str, expected_seed_hex: str
 ) -> None:
     mnemonic = Mnemonic.from_phrase(phrase, lang)
     seed = Seed(mnemonic, password)
@@ -46,7 +44,7 @@ def check_unicode_normalization(
 # Test vector is derived from https://github.com/infincia/bip39-rs/issues/26#issuecomment-586476647
 def issue_26() -> None:
     check_unicode_normalization(
-        "es",
+        Language.Spanish,
         "camello pomelo toque oponer urgente lástima merengue cutis tirón pudor pomo barco",
         "el español se habla en muchos países",
         "67a2cf87b9d110dd5210275fd4d7a107a0a0dd9446e02f3822f177365786ae440b8873693c88f732834af90785753d989a367f7094230901b204c567718ce6be",
@@ -55,7 +53,7 @@ def issue_26() -> None:
 
 def test_password_is_unicode_normalized() -> None:
     check_unicode_normalization(
-        "en",
+        Language.English,
         "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
         "nullius　à　nym.zone ¹teſts² English",
         "61f3aa13adcf5f4b8661fc062501d67eca3a53fc0ed129076ad7a22983b6b5ed0e84e47b24cff23b7fca57e127f62f28c1584ed487872d4bfbc773257bdbc434",
@@ -64,7 +62,7 @@ def test_password_is_unicode_normalized() -> None:
 
 def test_japanese_normalization_1() -> None:
     check_unicode_normalization(
-        "ja",
+        Language.Japanese,
         "あいこくしん　あいこくしん　あいこくしん　あいこくしん　あいこくしん　あいこくしん　あいこくしん　あいこくしん　あいこくしん　あいこくしん　あいこくしん　あおぞら",
         "㍍ガバヴァぱばぐゞちぢ十人十色",
         "a262d6fb6122ecf45be09c50492b31f92e9beb7d9a845987a02cefda57a15f9c467a17872029a9e92299b5cbdf306e3a0ee620245cbd508959b6cb7ca637bd55",
@@ -73,7 +71,7 @@ def test_japanese_normalization_1() -> None:
 
 def test_japanese_normalization_2() -> None:
     check_unicode_normalization(
-        "ja",
+        Language.Japanese,
         "うちゅう　ふそく　ひしょ　がちょう　うけもつ　めいそう　みかん　そざい　いばる　うけとる　さんま　さこつ　おうさま　ぱんつ　しひょう　めした　たはつ　いちぶ　つうじょう　てさぎょう　きつね　みすえる　いりぐち　かめれおん",
         "㍍ガバヴァぱばぐゞちぢ十人十色",
         "346b7321d8c04f6f37b49fdf062a2fddc8e1bf8f1d33171b65074531ec546d1d3469974beccb1a09263440fc92e1042580a557fdce314e27ee4eabb25fa5e5fe",
@@ -82,7 +80,7 @@ def test_japanese_normalization_2() -> None:
 
 def test_french_normalization() -> None:
     check_unicode_normalization(
-        "fr",
+        Language.French,
         "paternel xénon curatif séparer docile capable exigence boulon styliste plexus surface embryon crayon gorge exister",
         "nullius　à　nym.zone ¹teſts² Français",
         "cff9ffd2b23549e73601db4129a334c81b28a40f0ee819b5d6a54c409999f0dfb6b89df17cae6408c96786165c205403d283baadc03ffdd391a490923b7d9493",

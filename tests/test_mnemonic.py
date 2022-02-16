@@ -1,10 +1,10 @@
-from pybip39 import Mnemonic
+from pybip39 import Mnemonic, MnemonicType, Language
 
 
 def test_back_to_back() -> None:
-    m1 = Mnemonic(12, "en")
-    m2 = Mnemonic.from_phrase(m1.phrase, "en")
-    m3 = Mnemonic.from_entropy(m1.entropy, "en")
+    m1 = Mnemonic()
+    m2 = Mnemonic.from_phrase(m1.phrase)
+    m3 = Mnemonic.from_entropy(m1.entropy)
     assert m1.entropy == m2.entropy
     assert m1.entropy == m3.entropy
     assert m1.phrase == m2.phrase
@@ -68,7 +68,7 @@ def test_from_phrase() -> None:
 
 
 def test_str() -> None:
-    mnemonic = Mnemonic(15)
+    mnemonic = Mnemonic(MnemonicType.Words15)
 
     assert mnemonic.phrase == str(mnemonic)
 
