@@ -1,4 +1,3 @@
-from typing import Literal
 from pybip39 import Mnemonic, Seed, Language
 
 

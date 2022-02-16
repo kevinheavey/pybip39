@@ -1,5 +1,3 @@
-from typing import Literal
-
 class Language:
     English: Language
     ChineseSimplified: Language
