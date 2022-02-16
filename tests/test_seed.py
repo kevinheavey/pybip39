@@ -1,29 +1,29 @@
 from pybip39 import Mnemonic, Seed, Language
 
+ENTROPY = bytes(
+    [
+        0x33,
+        0xE4,
+        0x6B,
+        0xB1,
+        0x3A,
+        0x74,
+        0x6E,
+        0xA4,
+        0x1C,
+        0xDD,
+        0xE4,
+        0x5C,
+        0x90,
+        0x84,
+        0x6A,
+        0x79,
+    ]
+)
+
 
 def seed_hex_format() -> None:
-    entropy = bytes(
-        [
-            0x33,
-            0xE4,
-            0x6B,
-            0xB1,
-            0x3A,
-            0x74,
-            0x6E,
-            0xA4,
-            0x1C,
-            0xDD,
-            0xE4,
-            0x5C,
-            0x90,
-            0x84,
-            0x6A,
-            0x79,
-        ]
-    )
-
-    mnemonic = Mnemonic.from_entropy(entropy)
+    mnemonic = Mnemonic.from_entropy(ENTROPY)
     seed = Seed(mnemonic, "password")
 
     assert (
@@ -84,3 +84,9 @@ def test_french_normalization() -> None:
         "nullius　à　nym.zone ¹teſts² Français",
         "cff9ffd2b23549e73601db4129a334c81b28a40f0ee819b5d6a54c409999f0dfb6b89df17cae6408c96786165c205403d283baadc03ffdd391a490923b7d9493",
     )
+
+
+def test_bytes() -> None:
+    mnemonic = Mnemonic.from_entropy(ENTROPY)
+    seed = Seed(mnemonic, "password")
+    assert bytes(seed).hex() == seed.hex()
