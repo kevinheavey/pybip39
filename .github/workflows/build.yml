@@ -8,18 +8,16 @@ on:
 
 env:
   name: pybip39
+  python_version: "3.9"
 
 jobs:
   macos:
     runs-on: macos-latest
-    strategy:
-      matrix:
-        python_version: ["3.7", "3.8", "3.9", "3.10"]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python_version }}
+          python-version: ${{ env.python_version }}
           architecture: x64
       - name: Install Rust toolchain
         uses: actions-rs/toolchain@v1
@@ -56,12 +54,11 @@ jobs:
     strategy:
       matrix:
         target: [x64, x86]
-        python_version: ["3.7", "3.8", "3.9", "3.10"]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python_version }}
+          python-version: ${{ env.python_version }}
           architecture: ${{ matrix.target }}
       - name: Install Rust toolchain
         uses: actions-rs/toolchain@v1
@@ -91,12 +88,11 @@ jobs:
     strategy:
       matrix:
         target: [x86_64, i686]
-        python_version: ["3.7", "3.8", "3.9", "3.10"]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python_version }}
+          python-version: ${{ env.python_version }}
           architecture: x64
       - name: Build Wheels
         uses: messense/maturin-action@v1
@@ -122,7 +118,6 @@ jobs:
     strategy:
       matrix:
         target: [aarch64, armv7, s390x, ppc64le, ppc64]
-        python_version: ["3.7", "3.8", "3.9", "3.10"]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
